@@ -20,9 +20,8 @@ function sortBandNames(names) {
 // Sort the band names
 let sortedBandNames = sortBandNames(bandNames);
 
-// Create the HTML list
-let ulElement = document.createElement('ul');
-ulElement.setAttribute('id', 'band');
+// Get the ul element by id
+let ulElement = document.querySelector('#bands');
 
 // Add band names as list items
 sortedBandNames.forEach(name => {
@@ -30,6 +29,3 @@ sortedBandNames.forEach(name => {
   liElement.textContent = name;
   ulElement.appendChild(liElement);
 });
-
-// Print the HTML list
-console.log(ulElement.outerHTML);
