@@ -21,7 +21,7 @@ function sortBandNames(names) {
 let sortedBandNames = sortBandNames(bandNames);
 
 // Get the ul element by id
-let ulElement = document.querySelector('#bands');
+let ulElement = document.querySelector('#band');
 
 // Add band names as list items
 sortedBandNames.forEach(name => {
