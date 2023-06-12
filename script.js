@@ -1,31 +1,39 @@
 // Input array of band names
 let bandNames = ['The Beatles', 'Led Zeppelin', 'Aerosmith', 'Red Hot Chili Peppers', 'The Rolling Stones'];
 
-// Function to sort band names excluding articles
-function sortBandNames(names) {
-  // Regular expression to match articles ('a', 'an', 'the') at the beginning of the band names
-  const articleRegex = /^(a |an |the )/i;
-
-  // Sort the band names in lexicographic order excluding articles
-  names.sort((a, b) => {
-    // Remove articles from the band names for comparison
-    const nameA = a.replace(articleRegex, '');
-    const nameB = b.replace(articleRegex, '');
-    return nameA.localeCompare(nameB);
-  });
-
-  return names;
+function removeArticles(name) {
+  // Regular expression to match articles
+  const articleRegex = /^(a|an|the)\s/i;
+  
+  // Remove the article from the beginning of the name
+  return name.replace(articleRegex, '');
 }
 
-// Sort the band names
-let sortedBandNames = sortBandNames(bandNames);
+// Sort the band names in lexicographic order without articles
+let sortedBands = bandNames.sort((a, b) => {
+  // Remove articles from the band names for comparison
+  let nameA = removeArticles(a).toLowerCase();
+  let nameB = removeArticles(b).toLowerCase();
+  
+  // Compare the modified band names
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+  return 0;
+});
 
-// Get the ul element by id
-let ulElement = document.querySelector('#band');
+// Generate the HTML list
+let ulElement = document.createElement('ul');
+ulElement.setAttribute('id', 'band');
 
-// Add band names as list items
-sortedBandNames.forEach(name => {
+sortedBands.forEach((band) => {
   let liElement = document.createElement('li');
-  liElement.textContent = name;
+  liElement.textContent = band;
   ulElement.appendChild(liElement);
 });
+
+// Add the list to the document
+document.body.appendChild(ulElement);
